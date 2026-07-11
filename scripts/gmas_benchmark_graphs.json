@@ -1,0 +1,35 @@
+{
+  "graphs": {
+    "research_2": {
+      "graph_id": "e7313c3d",
+      "template_id": "research-writer",
+      "name": "Benchmark Research & Write (no tools)",
+      "agent_count": 2
+    },
+    "pipeline_3": {
+      "graph_id": "7ebd7487",
+      "template_id": "plan-execute-review",
+      "name": "Benchmark Plan Execute Review (no tools)",
+      "agent_count": 3
+    },
+    "qa_critic": {
+      "graph_id": "8c5c4aab",
+      "template_id": "qa-pipeline",
+      "name": "Benchmark Q&A Critic (no tools)",
+      "agent_count": 3
+    },
+    "data_pipeline": {
+      "graph_id": "fc44e72c",
+      "template_id": "data-analysis",
+      "name": "Benchmark Data Analysis (no tools)",
+      "agent_count": 4
+    },
+    "code_pipeline": {
+      "graph_id": "37ba1e58",
+      "template_id": "code-pipeline",
+      "name": "Benchmark Code Pipeline (no tools)",
+      "agent_count": 4
+    }
+  },
+  "disable_tools": true
+}

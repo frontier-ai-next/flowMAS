@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gmas-observability-server"
+version = "0.1.0"
+description = "Self-hosted observability service for the gMAS ecosystem"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "fastapi>=0.136.1",
+    "uvicorn[standard]>=0.46.0",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.1",
+    "sqlalchemy[asyncio]>=2.0.48",
+    "aiosqlite>=0.22.1",
+]
+
+[project.optional-dependencies]
+dev = ["httpx>=0.28.1", "pytest>=9.0.2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,31 @@
+{
+  "template_flow_id": "9490300d-c757-4022-b997-3c9a7a1f0327",
+  "flows": {
+    "research_2": {
+      "flow_id": "2bbdd01a-12f6-43dc-ae4a-c12f0e844a00",
+      "name": "Benchmark Research & Write (2 LLM)",
+      "llm_steps": 2
+    },
+    "pipeline_3": {
+      "flow_id": "bf212408-6a13-4569-85fd-244ca1260ad1",
+      "name": "Benchmark Plan Execute Review (3 LLM)",
+      "llm_steps": 3
+    },
+    "qa_critic": {
+      "flow_id": "70415df5-398a-4e96-9adb-b6bb7d000dbe",
+      "name": "Benchmark Q&A Critic (3 LLM)",
+      "llm_steps": 3
+    },
+    "data_pipeline": {
+      "flow_id": "3e078867-60ae-4f38-a6cc-80f8b54e23de",
+      "name": "Benchmark Data Analysis (4 LLM)",
+      "llm_steps": 4
+    },
+    "code_pipeline": {
+      "flow_id": "197256dc-c358-49d0-ae4d-1d65c0765725",
+      "name": "Benchmark Code Pipeline (4 LLM)",
+      "llm_steps": 4
+    }
+  },
+  "note": "Recreate with scripts/setup_langflow_benchmark_flows.py --patch-config"
+}

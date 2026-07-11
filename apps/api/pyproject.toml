@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gmas-webui"
+version = "0.1.0"
+description = "Web UI for the gMAS graph multi-agent system — FastAPI backend + React frontend"
+requires-python = ">=3.12,<3.14"
+license = { text = "MIT" }
+authors = [
+    { name = "Vitaly Belov", email = "vitalii.belof@gmail.com" },
+    { name = "Artyom Sosedka", email = "avalsosedka@sberbank.ru" },
+    { name = "Vladislav Tishin", email = "vvikttishin@sberbank.ru" },
+    { name = "Arkadiy Bagdasaryan", email = "arkadiichruc@gmail.com" },
+]
+keywords = ["gmas", "web-ui", "fastapi", "multi-agent"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: FastAPI",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+dependencies = [
+    "fastapi>=0.136.1",
+    "uvicorn[standard]>=0.46.0",
+    "websockets>=16.0",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.1",
+    "python-multipart>=0.0.28",
+    "apscheduler>=3.10.4",
+    "cryptography>=46.0.0",
+]
+
+[project.optional-dependencies]
+# Install gMAS SDK from the vendored submodule:
+#   uv pip install -e vendor/gmas
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
+]
+
+[project.scripts]
+gmas-webui = "backend.main:app"
+
+[project.urls]
+Repository = "https://gitlab.frontierai.ru/frontierai/teams/mag/dmas/gmas"
+Documentation = "https://gitlab.frontierai.ru/frontierai/teams/mag/dmas/gmas/-/blob/main/docs/index.md"
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

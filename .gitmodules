@@ -1,0 +1,3 @@
+[submodule "vendor/gmas"]
+	path = vendor/gmas
+	url = ../gmas.git

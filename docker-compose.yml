@@ -1,0 +1,86 @@
+services:
+  observability:
+    build:
+      context: .
+      dockerfile: Dockerfile.observability
+    container_name: gmas-observability
+    environment:
+      - GMAS_OBSERVABILITY_DATA_DIR=/app/data
+      - GMAS_OBSERVABILITY_API_KEY=${GMAS_OBSERVABILITY_API_KEY:-}
+    volumes:
+      - ${GMAS_OBSERVABILITY_DATA_PATH:-./.docker-data/observability}:/app/data
+    ports:
+      - "${GMAS_OBSERVABILITY_PORT:-8100}:8100"
+    networks:
+      - gmas-net
+    restart: unless-stopped
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: gmas-api
+    environment:
+      - GMAS_DATA_DIR=/app/apps/api/data
+      - GMAS_SRC_PATH=/app/vendor/gmas/src
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - GMAS_PROVIDER_SECRET_KEY=${GMAS_PROVIDER_SECRET_KEY:-}
+      - GMAS_OBSERVABILITY_ENABLED=${GMAS_OBSERVABILITY_ENABLED:-true}
+      - GMAS_OBSERVABILITY_ENDPOINT=${GMAS_OBSERVABILITY_ENDPOINT:-http://observability:8100}
+      - GMAS_OBSERVABILITY_PROJECT=${GMAS_OBSERVABILITY_PROJECT:-gmas-demo}
+      - GMAS_OBSERVABILITY_ENVIRONMENT=${GMAS_OBSERVABILITY_ENVIRONMENT:-production}
+      - GMAS_OBSERVABILITY_API_KEY=${GMAS_OBSERVABILITY_API_KEY:-}
+      - GMAS_OBSERVABILITY_CAPTURE_CONTENT=${GMAS_OBSERVABILITY_CAPTURE_CONTENT:-true}
+    volumes:
+      - ${GMAS_DATA_PATH:-./.docker-data/api}:/app/apps/api/data
+    networks:
+      - gmas-net
+      - traefik-proxy-net
+    restart: unless-stopped
+    depends_on:
+      observability:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-proxy-net"
+      - "traefik.http.routers.gmas-api.rule=Host(`${GMAS_HOST:-localhost}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.gmas-api.entrypoints=websecure"
+      - "traefik.http.routers.gmas-api.tls=true"
+      - "traefik.http.routers.gmas-api.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.gmas-api.priority=100"
+      - "traefik.http.services.gmas-api.loadbalancer.server.port=8000"
+      - "traefik.http.routers.gmas-ws.rule=Host(`${GMAS_HOST:-localhost}`) && PathPrefix(`/ws`)"
+      - "traefik.http.routers.gmas-ws.entrypoints=websecure"
+      - "traefik.http.routers.gmas-ws.tls=true"
+      - "traefik.http.routers.gmas-ws.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.gmas-ws.priority=90"
+      - "traefik.http.services.gmas-ws.loadbalancer.server.port=8000"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: gmas-web
+    networks:
+      - gmas-net
+      - traefik-proxy-net
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-proxy-net"
+      - "traefik.http.routers.gmas-web.rule=Host(`${GMAS_HOST:-localhost}`)"
+      - "traefik.http.routers.gmas-web.entrypoints=websecure"
+      - "traefik.http.routers.gmas-web.tls=true"
+      - "traefik.http.routers.gmas-web.tls.certresolver=letsEncrypt"
+      - "traefik.http.routers.gmas-web.priority=1"
+      - "traefik.http.services.gmas-web.loadbalancer.server.port=3000"
+
+networks:
+  gmas-net:
+    name: gmas-net
+  traefik-proxy-net:
+    external: true

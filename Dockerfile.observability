@@ -1,0 +1,14 @@
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+
+WORKDIR /app
+COPY apps/observability ./apps/observability
+RUN uv sync --frozen --project apps/observability --no-dev
+RUN mkdir -p /app/data
+
+ENV PATH=/app/apps/observability/.venv/bin:$PATH
+ENV PYTHONPATH=/app/apps/observability
+ENV GMAS_OBSERVABILITY_DATA_DIR=/app/data
+EXPOSE 8100
+HEALTHCHECK --interval=15s --timeout=5s --start-period=5s --retries=3 \
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8100/api/health')"
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8100"]

@@ -1,0 +1,16 @@
+services:
+  api:
+    ports:
+      - "${GMAS_API_PORT:-8000}:8000"
+
+  web:
+    build:
+      args:
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
+    ports:
+      - "${GMAS_WEB_PORT:-3000}:3000"
+
+networks:
+  traefik-proxy-net:
+    external: false
+    name: gmas-local-proxy-net

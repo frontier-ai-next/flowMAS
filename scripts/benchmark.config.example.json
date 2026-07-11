@@ -1,0 +1,105 @@
+{
+  "task_query": "Reply with exactly: benchmark-ok",
+  "langflow": {
+    "base_url": "http://localhost:7860",
+    "api_key": "",
+    "flow_id": ""
+  },
+  "gmas": {
+    "base_url": "http://localhost:8000",
+    "llm_provider_id": null,
+    "disable_tools": true,
+    "config": {
+      "adaptive": false,
+      "enable_parallel": false,
+      "max_retries": 1,
+      "timeout": 180
+    }
+  },
+  "observability": {
+    "base_url": "http://localhost:8100",
+    "api_key": "",
+    "project_id": "gmas-demo",
+    "environment": "development"
+  },
+  "run": {
+    "timeout_seconds": 300,
+    "poll_interval_seconds": 0.5,
+    "runs_per_scenario": 1,
+    "compile_validate_repeats": 3,
+    "skip_execution": false,
+    "measure_stream_ttft": true,
+    "measure_ws_ttft": true,
+    "measure_design_time": true,
+    "concurrency": 1
+  },
+  "scenarios": [
+    {
+      "id": "single_llm",
+      "name": "Single LLM",
+      "architecture": "single_agent",
+      "enabled": true,
+      "runs": 2,
+      "platforms": ["langflow", "gmas"],
+      "task_query": "Reply with exactly: benchmark-ok",
+      "langflow": { "flow_id": "YOUR_FLOW_UUID" },
+      "gmas": { "graph_id": "YOUR_GRAPH_ID", "llm_provider_id": "your-provider", "disable_tools": true }
+    },
+    {
+      "id": "research_2",
+      "name": "Research & Write (2 agents)",
+      "architecture": "sequential_2",
+      "enabled": true,
+      "runs": 1,
+      "platforms": ["langflow", "gmas"],
+      "task_query": "Summarize in one sentence: what is 2+2?",
+      "langflow": { "flow_id": "YOUR_RESEARCH_2_FLOW_UUID" },
+      "gmas": { "graph_id": "YOUR_RESEARCH_GRAPH_ID", "llm_provider_id": "your-provider", "disable_tools": true }
+    },
+    {
+      "id": "pipeline_3",
+      "name": "Plan → Execute → Review (3 agents)",
+      "architecture": "sequential_pipeline",
+      "enabled": true,
+      "runs": 1,
+      "platforms": ["langflow", "gmas"],
+      "task_query": "Reply with exactly: benchmark-pipeline-ok",
+      "langflow": { "flow_id": "YOUR_PIPELINE_3_FLOW_UUID" },
+      "gmas": { "graph_id": "YOUR_PIPELINE_GRAPH_ID", "disable_tools": true }
+    },
+    {
+      "id": "qa_critic",
+      "name": "Q&A with Critic (3 agents)",
+      "architecture": "sequential_review",
+      "enabled": true,
+      "runs": 1,
+      "platforms": ["langflow", "gmas"],
+      "task_query": "Answer in one word: what is 2+2?",
+      "gmas": { "graph_id": "YOUR_QA_GRAPH_ID", "disable_tools": true }
+    },
+    {
+      "id": "data_pipeline",
+      "name": "Data Analysis (4 agents)",
+      "architecture": "sequential_4",
+      "enabled": true,
+      "runs": 1,
+      "platforms": ["langflow", "gmas"],
+      "task_query": "Reply with exactly: benchmark-data-ok",
+      "gmas": { "graph_id": "YOUR_DATA_GRAPH_ID", "disable_tools": true }
+    },
+    {
+      "id": "code_pipeline",
+      "name": "Code Pipeline (4 agents)",
+      "architecture": "multi_agent_dag",
+      "enabled": true,
+      "runs": 1,
+      "platforms": ["langflow", "gmas"],
+      "task_query": "Reply with exactly: benchmark-code-ok",
+      "gmas": { "graph_id": "YOUR_CODE_GRAPH_ID", "disable_tools": true }
+    }
+  ],
+  "import": {
+    "langflow_json_path": "",
+    "name_override": "Imported from Langflow benchmark"
+  }
+}
