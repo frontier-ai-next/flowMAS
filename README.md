@@ -6,11 +6,12 @@ multi-agent workflows powered by **gMAS**.
 [![CI](https://github.com/frontier-ai-next/flowMAS/actions/workflows/ci.yml/badge.svg)](https://github.com/frontier-ai-next/flowMAS/actions/workflows/ci.yml)
 
 [Live demo](https://gmas.frontierai.ru/) ·
+[Documentation](https://frontier-ai-next.github.io/flowMAS/) ·
 [Core gMAS SDK](https://github.com/frontier-ai-next/gMAS) ·
 [Evaluation](docs/EVALUATION.md) ·
 [MIT license](LICENSE)
 
-![flowMAS shared workflow lifecycle](apps/web/client/public/flowmas-studio-architecture-detailed.png)
+![flowMAS shared workflow lifecycle](docs/assets/flowmas-studio-architecture-detailed.png)
 
 - **Workflow studio** — visual graph editor: agents, edges, conditions, execution-order preview
 - **Run monitoring** — live timeline, tools, tokens, events, topology changes

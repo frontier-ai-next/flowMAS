@@ -176,6 +176,9 @@ out/
 !apps/web/client/public/**/*.png
 !apps/web/client/public/**/*.jpg
 !apps/web/client/public/**/*.svg
+!docs/assets/**/*.png
+!docs/assets/**/*.jpg
+!docs/assets/**/*.svg
 
 # ── Generated benchmark reports (local only) ──────────────────────────────────
 benchmarks/reports/

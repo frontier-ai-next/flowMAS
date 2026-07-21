@@ -1,0 +1,57 @@
+:root > * {
+  --md-primary-fg-color: #173f91;
+  --md-primary-fg-color--light: #2f6be6;
+  --md-primary-fg-color--dark: #102a64;
+  --md-accent-fg-color: #6d3df5;
+}
+
+[data-md-color-scheme="slate"] {
+  --md-hue: 222;
+  --md-primary-fg-color: #477ce3;
+  --md-primary-fg-color--light: #73a0ff;
+  --md-primary-fg-color--dark: #2753ae;
+  --md-accent-fg-color: #9c7bff;
+}
+
+.md-header {
+  box-shadow: 0 1px 0 color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.md-typeset h1 {
+  font-weight: 720;
+  letter-spacing: -0.025em;
+}
+
+.md-typeset h2 {
+  font-weight: 680;
+  letter-spacing: -0.015em;
+}
+
+.md-typeset .md-button {
+  border-radius: 0.45rem;
+  font-weight: 650;
+}
+
+.md-typeset .grid.cards > ul > li,
+.md-typeset .grid.cards > ol > li {
+  border-radius: 0.65rem;
+  box-shadow: 0 0.15rem 0.55rem color-mix(in srgb, var(--md-default-fg-color) 8%, transparent);
+}
+
+.md-typeset img[alt="flowMAS shared workflow lifecycle"] {
+  display: block;
+  width: 100%;
+  margin: 1.5rem auto 2rem;
+  border: 1px solid color-mix(in srgb, var(--md-default-fg-color) 14%, transparent);
+  border-radius: 0.6rem;
+}
+
+.md-typeset table:not([class]) {
+  font-size: 0.72rem;
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-grid {
+    max-width: 88rem;
+  }
+}

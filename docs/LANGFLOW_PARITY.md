@@ -1,4 +1,4 @@
-# Langflow vs gMAS Web UI — feature parity
+# Langflow vs flowMAS feature parity
 
 This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities to **flowMAS** (web studio + gMAS runtime). Use it to track what we already match and what to build next.
 

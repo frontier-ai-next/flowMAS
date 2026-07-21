@@ -1,4 +1,4 @@
-# gMAS Web UI — Guide
+# flowMAS UI guide
 
 End-to-end guide for the web client: what every page does, what every colour
 means, and how features fit together.
