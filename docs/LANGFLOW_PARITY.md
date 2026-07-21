@@ -1,6 +1,6 @@
 # Langflow vs gMAS Web UI — feature parity
 
-This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities to **gmas-demo** (gMAS Web UI + gMAS runtime). Use it to track what we already match and what to build next.
+This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities to **flowMAS** (web studio + gMAS runtime). Use it to track what we already match and what to build next.
 
 ## Legend
 
@@ -15,7 +15,7 @@ This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities
 
 ## Build & canvas
 
-| Langflow | gMAS demo | Status | Notes |
+| Langflow | flowMAS | Status | Notes |
 |----------|-----------|--------|-------|
 | Visual flow editor | Workflow canvas | ✅ | Agents, Start/Finish, edges |
 | Component library (Core + Bundles) | Agent + Tool registry | ⚠️ | Langflow has LLM, vector, parser, etc. components |
@@ -37,7 +37,7 @@ This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities
 
 ## Control flow & routing
 
-| Langflow | gMAS demo | Status | Notes |
+| Langflow | flowMAS | Status | Notes |
 |----------|-----------|--------|-------|
 | If-Else / conditional routing | Edge conditions | ✅ | success / fail / keyword / loop |
 | Keyword branches (If-Else style) | Conditional + keyword edges | ✅ | Cyan edges; Run Settings hints |
@@ -53,7 +53,7 @@ This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities
 
 ## Execution & triggers
 
-| Langflow | gMAS demo | Status | Notes |
+| Langflow | flowMAS | Status | Notes |
 |----------|-----------|--------|-------|
 | Run once (Playground / API) | Run button + `POST /api/execution/run` | ✅ | |
 | Token streaming | WebSocket events | ✅ | |
@@ -89,7 +89,7 @@ This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities
 
 ## Agents, tools & MCP
 
-| Langflow | gMAS demo | Status | Notes |
+| Langflow | flowMAS | Status | Notes |
 |----------|-----------|--------|-------|
 | Agent component | Agent nodes | ✅ | |
 | Tool Mode (component as tool) | Tool registry + agent tools | ⚠️ | |
@@ -101,7 +101,7 @@ This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities
 
 ## Observability & debugging
 
-| Langflow | gMAS demo | Status | Notes |
+| Langflow | flowMAS | Status | Notes |
 |----------|-----------|--------|-------|
 | Playground (test flow) | Run + Console | ✅ | |
 | Component logs | Console + Inspector | ✅ | Click log row for details |
@@ -113,7 +113,7 @@ This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities
 
 ## API & deployment
 
-| Langflow | gMAS demo | Status | Notes |
+| Langflow | flowMAS | Status | Notes |
 |----------|-----------|--------|-------|
 | `/v1/run/{flow_id}` | `/api/execution/run` | ✅ | |
 | Flow CRUD API | `/api/graphs` | ✅ | |
@@ -126,7 +126,7 @@ This document maps [Langflow](https://docs.langflow.org/) (v1.10.x) capabilities
 
 ## Settings & LLM
 
-| Langflow | gMAS demo | Status | Notes |
+| Langflow | flowMAS | Status | Notes |
 |----------|-----------|--------|-------|
 | Multiple LLM providers | Settings → LLM Providers | ✅ | |
 | Per-flow provider override | Run Settings | ✅ | |

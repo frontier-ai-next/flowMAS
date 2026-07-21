@@ -1,16 +1,30 @@
-# gMAS-Demo
+# flowMAS
 
-Web studio + demo API for **gMAS** (graph multi-agent system framework).
+Graph-native web studio, demo API, and self-hosted observability for mutable
+multi-agent workflows powered by **gMAS**.
+
+[![CI](https://github.com/frontier-ai-next/flowMAS/actions/workflows/ci.yml/badge.svg)](https://github.com/frontier-ai-next/flowMAS/actions/workflows/ci.yml)
+
+[Live demo](https://gmas.frontierai.ru/) ·
+[Core gMAS SDK](https://github.com/frontier-ai-next/gMAS) ·
+[Evaluation](docs/EVALUATION.md) ·
+[MIT license](LICENSE)
+
+![flowMAS shared workflow lifecycle](apps/web/client/public/flowmas-studio-architecture-detailed.png)
 
 - **Workflow studio** — visual graph editor: agents, edges, conditions, execution-order preview
 - **Run monitoring** — live timeline, tools, tokens, events, topology changes
 - **Configure** — LLM providers, tools, runner config, routing policy, topology hooks
 - **Observe** — run history, metrics, diagnostics, error output
 
-The gMAS SDK core lives in a **separate repository** ([`gMAS`](https://gitlab.frontierai.ru/frontierai/teams/mag/dmas/gmas)) and is vendored here as a git **submodule** at `vendor/gmas`. This repo contains only the demo (UI + API); it does not modify the core.
+The gMAS SDK core lives in a **separate repository**
+([`frontier-ai-next/gMAS`](https://github.com/frontier-ai-next/gMAS)) and is
+vendored here as a git **submodule** at `vendor/gmas`. This repository contains
+the studio, API, and observability integration; it consumes the core without
+modifying it.
 
 ```
-gmas-demo/
+flowMAS/
 ├── apps/
 │   ├── web/     # React 19 + Vite — landing + studio
 │   ├── api/     # FastAPI backend (imports `gmas`)
@@ -24,11 +38,38 @@ gmas-demo/
 
 ---
 
+## Evaluation snapshot
+
+The current evaluation covers **68 matched model-dataset-topology
+configurations** on BBH, GSM8K, and MMLU-Pro. Against matched LangGraph runtime
+graphs, observed latency changed by topology:
+
+| Topology | Latency vs. LangGraph | Tokens vs. LangGraph | Accuracy delta |
+|---|---:|---:|---:|
+| Single agent | -4.0% | -1.5% | +0.0 pp |
+| Three-agent chain | +1.0% | +3.1% | +2.5 pp |
+| Fan-in | -8.0% | +1.7% | +3.0 pp |
+| Fan-out | -9.3% | -0.1% | +2.9 pp |
+
+Runtime controls produced the largest savings when they avoided unnecessary
+model calls. In the evaluated ablations, early stopping reduced tokens by
+**52.6%** and latency by **45.0%**; the adaptive policy reduced tokens by
+**21.2%** and latency by **18.5%**.
+
+A separate local studio-path benchmark used six paired synthetic workflows.
+gMAS compilation remained below **2 ms**, and gMAS delivered the first streamed
+output earlier in all six observed scenarios. These measurements are scoped
+engineering results, not a claim that every workflow is faster or cheaper.
+See [Evaluation](docs/EVALUATION.md) for the protocol, complete tables, and
+limitations.
+
+---
+
 ## Cloning (read this — submodule)
 
 ```bash
 # fresh clone — pulls the SDK submodule too
-git clone --recurse-submodules <gmas-demo-url>
+git clone --recurse-submodules https://github.com/frontier-ai-next/flowMAS.git
 
 # already cloned without --recurse-submodules:
 git submodule update --init --recursive
@@ -185,6 +226,6 @@ Serves the static web build from `apps/web/dist/public`; API + WebSocket proxied
 | | repo | what |
 |---|---|---|
 | **core SDK** | `gMAS` | graph engine, agents, runner, tools — the framework |
-| **this** | `gMAS-Demo` | UI studio + demo API on top of the SDK (submodule) |
+| **this** | `flowMAS` | studio, demo API, and observability on top of the SDK (submodule) |
 
 This repo never modifies `src/gmas` — the core is consumed as-is via the submodule.

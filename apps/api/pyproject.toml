@@ -47,8 +47,8 @@ dev = [
 gmas-webui = "backend.main:app"
 
 [project.urls]
-Repository = "https://gitlab.frontierai.ru/frontierai/teams/mag/dmas/gmas"
-Documentation = "https://gitlab.frontierai.ru/frontierai/teams/mag/dmas/gmas/-/blob/main/docs/index.md"
+Repository = "https://github.com/frontier-ai-next/flowMAS"
+Documentation = "https://github.com/frontier-ai-next/flowMAS/tree/main/docs"
 
 [tool.hatch.build.targets.wheel]
 packages = ["backend"]
