@@ -24,7 +24,7 @@ language.
 | Layer | Location | Owns |
 | --- | --- | --- |
 | Studio | `apps/web` | Canvas, inspectors, configuration, live feedback, and run navigation |
-| Platform API | `apps/api` | Persistence, compilation, execution control, sessions, and schedules |
+| Platform API | `apps/api` | Persistence, graph preparation, execution control, sessions, and schedules |
 | Runtime | `vendor/gmas` | Role graph, agents, schedulers, runner, tools, and graph semantics |
 | Observability SDK | `packages/gmas-observability` | Redaction, bounded events, asynchronous batching, and callback integration |
 | Observability service | `apps/observability` | Ingestion, persistence, trace reconstruction, metrics, and Trace Explorer |

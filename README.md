@@ -47,10 +47,10 @@ graphs, observed latency changed by topology:
 
 | Topology | Latency vs. LangGraph | Tokens vs. LangGraph | Accuracy delta |
 |---|---:|---:|---:|
-| Single agent | -4.0% | -1.5% | +0.0 pp |
-| Three-agent chain | +1.0% | +3.1% | +2.5 pp |
-| Fan-in | -8.0% | +1.7% | +3.0 pp |
-| Fan-out | -9.3% | -0.1% | +2.9 pp |
+| Single agent | -4.9% | -3.0% | +0.6 pp |
+| Three-agent chain | -1.4% | +0.5% | +2.1 pp |
+| Fan-in | -11.6% | -2.6% | +3.8 pp |
+| Fan-out | -19.6% | -12.1% | +5.6 pp |
 
 Runtime controls produced the largest savings when they avoided unnecessary
 model calls. In the evaluated ablations, early stopping reduced tokens by
@@ -58,8 +58,8 @@ model calls. In the evaluated ablations, early stopping reduced tokens by
 **21.2%** and latency by **18.5%**.
 
 A separate local studio-path benchmark used six paired synthetic workflows.
-gMAS compilation remained below **2 ms**, and gMAS delivered the first streamed
-output earlier in all six observed scenarios. These measurements are scoped
+gMAS graph preparation remained below **2 ms**, and gMAS delivered the first
+streamed output earlier in all six observed scenarios. These measurements are scoped
 engineering results, not a claim that every workflow is faster or cheaper.
 See [Evaluation](docs/EVALUATION.md) for the protocol, complete tables, and
 limitations.

@@ -33,15 +33,17 @@ platform ranking.
 
 | Topology | LangGraph latency (s) | gMAS latency (s) | Latency delta | LangGraph tokens | gMAS tokens | Token delta | Accuracy delta |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Single agent | 4.13 | 3.96 | -4.0% | 491 | 484 | -1.5% | +0.0 pp |
-| Three-agent chain | 15.91 | 16.07 | +1.0% | 2,620 | 2,702 | +3.1% | +2.5 pp |
-| Fan-in | 22.08 | 20.32 | -8.0% | 4,495 | 4,573 | +1.7% | +3.0 pp |
-| Fan-out | 38.16 | 34.60 | -9.3% | 9,416 | 9,410 | -0.1% | +2.9 pp |
+| Single agent | 4.0 | 3.8 | -4.9% | 534 | 518 | -3.0% | +0.6 pp |
+| Three-agent chain | 15.9 | 15.7 | -1.4% | 2,672 | 2,685 | +0.5% | +2.1 pp |
+| Fan-in | 20.7 | 18.3 | -11.6% | 4,261 | 4,152 | -2.6% | +3.8 pp |
+| Fan-out | 39.7 | 32.0 | -19.6% | 9,857 | 8,661 | -12.1% | +5.6 pp |
 
-The observed latency effect is topology-dependent: fan-in and fan-out are
-faster in this evaluation, while the mandatory three-agent chain is slightly
-slower. Token changes are smaller and mixed. Accuracy deltas in this table are
-descriptive and do not establish a universal quality improvement.
+The observed latency effect is topology-dependent: all four patterns are
+faster in this evaluation, with the largest reduction in fan-out. Token use
+falls for three patterns and rises slightly for the three-agent chain.
+Accuracy deltas in this table are descriptive and do not establish a universal
+quality improvement. Percentage deltas are calculated from unrounded values;
+displayed latency averages are rounded to one decimal place.
 
 ## Runtime-control ablations
 
@@ -80,7 +82,7 @@ remaining scenarios).
 | Data Analysis | 4 | 1.5 / 10.3 | 32.5 / 71.7 |
 | Code Pipeline | 4 | 1.5 / 11.4 | 35.9 / 59.4 |
 
-`Design time` compares gMAS graph compilation with Langflow flow build time.
+`Design time` compares gMAS graph preparation with Langflow flow build time.
 `First chunk` measures submission to the first streamed byte. It is not
 end-to-end answer latency.
 
